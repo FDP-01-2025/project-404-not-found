@@ -14,7 +14,7 @@ El juego consiste en disparar a la cabeza del centipede para ganar, moviendote u
 
 En arcade se usa trackball, lo que permite un movimiento suave y preciso, en cambio en el ordenador ocupas las flechas direccionales. 
 
-Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dificulta.
+Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dificultad.
 
 El centipede se mueve hacia abajo hasta llegar al shooter del jugador, para vencerlo tienes que disparale en la cabeza, de lo contario, perderás.
 
