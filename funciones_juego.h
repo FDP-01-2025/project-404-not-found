@@ -40,7 +40,7 @@ void showGame();
 void updateShots();
 void updateCentipede();
 void updateGame();
-bool juegoTerminado();
+bool endGame();
 void startGame();
 
 #endif

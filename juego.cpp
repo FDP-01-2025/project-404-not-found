@@ -146,18 +146,18 @@ void updateCentipede() {
 
 void updateGame() {
     if (_kbhit()) {
-        int tecla = _getch();
-        if (tecla == 224) {
-            int flecha = _getch();
-            if (flecha == 75 && playerX > 0) playerX--;
-            if (flecha == 77 && playerX < WIDTH - 1) playerX++;
-        } else if (tecla == ' ') {
+        int key = _getch();
+        if (key == 224) {
+            int arrow = _getch();
+            if (arrow == 75 && playerX > 0) playerX--;
+            if (arrow == 77 && playerX < WIDTH - 1) playerX++;
+        } else if (key == ' ') {
             if (shots.size() < 3) {
-                Shot nuevoDisparo;
-                nuevoDisparo.x = playerX;
-                nuevoDisparo.y = HEIGHT - 2;
-                nuevoDisparo.active = true;
-                shots.push_back(nuevoDisparo);
+                Shot newShot;
+                newShot.x = playerX;
+                newShot.y = HEIGHT - 2;
+                newShot.active = true;
+                shots.push_back(newShot);
             }
         }
     }
@@ -170,7 +170,7 @@ void updateGame() {
     }
 }
 
-bool juegoTerminado() {
+bool endGame() {
     return lives <= 0;
 }
 
@@ -188,7 +188,7 @@ void startGame() {
 
     system("cls");
 
-    while (!juegoTerminado()) {
+    while (!endGame()) {
         clearScreenGame();
         drawScreenGame();
         showGame();
