@@ -77,7 +77,7 @@ int main() {
         if (opcion == 1) {
             cout << "\nCARGANDO PARTIDA...\n";
             Sleep(1000);
-            iniciarJuego();
+            startGame();
         } else {
             cout << "\nGRACIAS POR JUGAR\n";
             break;

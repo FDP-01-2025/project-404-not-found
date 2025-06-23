@@ -37,10 +37,10 @@ void startCentipede();
 void clearScreenGame();
 void drawScreenGame();
 void showGame();
-void actualizarDisparos();
-void actualizarCiempies();
-void actualizarJuego();
+void updateShots();
+void updateCentipede();
+void updateGame();
 bool juegoTerminado();
-void iniciarJuego();
+void startGame();
 
 #endif

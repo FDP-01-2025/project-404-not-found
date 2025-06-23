@@ -79,7 +79,7 @@ void showGame() {
     cout << "+" << endl;
 }
 
-void actualizarDisparos() {
+void updateShots() {
     for (int i = 0; i < shots.size(); i++) {
         if (shots[i].active) {
             shots[i].y--;
@@ -109,7 +109,7 @@ void actualizarDisparos() {
     }
 }
 
-void actualizarCiempies() {
+void updateCentipede() {
     bool chocoBorde = false;
     for (int cx : centipedeX) {
         int nuevoX = cx + direction;
@@ -144,7 +144,7 @@ void actualizarCiempies() {
     }
 }
 
-void actualizarJuego() {
+void updateGame() {
     if (_kbhit()) {
         int tecla = _getch();
         if (tecla == 224) {
@@ -162,10 +162,10 @@ void actualizarJuego() {
         }
     }
 
-    actualizarDisparos();
+    updateShots();
 
     if (clock() - lastmoveCentipede > centipedeSpeed * CLOCKS_PER_SEC / 1000) {
-        actualizarCiempies();
+        updateCentipede();
         lastmoveCentipede = clock();
     }
 }
@@ -174,7 +174,7 @@ bool juegoTerminado() {
     return lives <= 0;
 }
 
-void iniciarJuego() {
+void startGame() {
     GetConsoleCursorInfo(hConsole, &cursorInfo);
     cursorInfo.bVisible = false;
     SetConsoleCursorInfo(hConsole, &cursorInfo);
@@ -192,7 +192,7 @@ void iniciarJuego() {
         clearScreenGame();
         drawScreenGame();
         showGame();
-        actualizarJuego();
+        updateGame();
         Sleep(10);
     }
 
