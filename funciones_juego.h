@@ -9,7 +9,7 @@ const int WIDTH = 40;
 const int HEIGHT = 20;
 
 extern char pantalla[HEIGHT][WIDTH];
-extern int jugadorX;
+extern int playerX;
 
 struct Shot {
     int x, y;
@@ -17,26 +17,26 @@ struct Shot {
 };
 
 extern std::vector<Shot> shots;
-extern std::vector<int> ciempiesX;
-extern int ciempiesY;
-extern int direccion;
-extern int cuentaInicial;
-extern const int separacion;
+extern std::vector<int> centipedeX;
+extern int centipedeY;
+extern int direction;
+extern int initialCount;
+extern const int separation;
 
-extern int puntuacion;
-extern int vidas;
+extern int score;
+extern int lives;
 
-extern int velocidadCiempies;
-extern clock_t ultimaMovidaCiempies;
-extern clock_t tiempoInicio;
+extern int centipedeSpeed;
+extern clock_t lastmoveCentipede;
+extern clock_t startTime;
 
 extern HANDLE hConsole;
 extern CONSOLE_CURSOR_INFO cursorInfo;
 
-void iniciarCiempies();
-void limpiarPantallaJuego();
-void dibujarPantallaJuego();
-void mostrarJuego();
+void startCentipede();
+void clearScreenGame();
+void drawScreenGame();
+void showGame();
 void actualizarDisparos();
 void actualizarCiempies();
 void actualizarJuego();

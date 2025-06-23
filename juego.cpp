@@ -6,34 +6,34 @@
 using namespace std;
 
 char pantalla[HEIGHT][WIDTH];
-int jugadorX = WIDTH / 2;
+int playerX = WIDTH / 2;
 
 vector<Shot> shots;
-vector<int> ciempiesX;
-int ciempiesY = 0;
-int direccion = 1;
-int cuentaInicial = 12;
-const int separacion = 3;
+vector<int> centipedeX;
+int centipedeY = 0;
+int direction = 1;
+int initialCount = 12;
+const int separation = 3;
 
-int puntuacion = 0;
-int vidas = 3;
+int score = 0;
+int lives = 3;
 
-int velocidadCiempies = 80;
-clock_t ultimaMovidaCiempies = 0;
-clock_t tiempoInicio;
+int centipedeSpeed = 80;
+clock_t lastmoveCentipede = 0;
+clock_t startTime;
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 CONSOLE_CURSOR_INFO cursorInfo;
 
-void iniciarCiempies() {
-    ciempiesY = 0;
-    ciempiesX.clear();
-    for (int i = 0; i < cuentaInicial; i++) {
-        ciempiesX.push_back((i * separacion) % WIDTH);
+void startCentipede() {
+    centipedeY = 0;
+    centipedeX.clear();
+    for (int i = 0; i < initialCount; i++) {
+        centipedeX.push_back((i * separation) % WIDTH);
     }
 }
 
-void limpiarPantallaJuego() {
+void clearScreenGame() {
     for (int y = 0; y < HEIGHT; y++) {
         for (int x = 0; x < WIDTH; x++) {
             pantalla[y][x] = ' ';
@@ -41,8 +41,8 @@ void limpiarPantallaJuego() {
     }
 }
 
-void dibujarPantallaJuego() {
-    pantalla[HEIGHT - 1][jugadorX] = '^';
+void drawScreenGame() {
+    pantalla[HEIGHT - 1][playerX] = '^';
 
     for (auto& shot : shots) {
         if (shot.active && shot.y >= 0 && shot.y < HEIGHT) {
@@ -50,18 +50,18 @@ void dibujarPantallaJuego() {
         }
     }
 
-    for (int cx : ciempiesX) {
-        if (ciempiesY < HEIGHT) {
-            pantalla[ciempiesY][cx] = 'O';
+    for (int cx : centipedeX) {
+        if (centipedeY < HEIGHT) {
+            pantalla[centipedeY][cx] = 'O';
         }
     }
 }
 
-void mostrarJuego() {
+void showGame() {
     COORD pos = {0, 0};
     SetConsoleCursorPosition(hConsole, pos);
 
-    cout << "PUNTAJE: " << puntuacion << "   VIDAS: " << vidas << endl;
+    cout << "PUNTAJE: " << score << "   VIDAS: " << lives << endl;
     cout << "+";
     for (int i = 0; i < WIDTH; i++) cout << "-";
     cout << "+" << endl;
@@ -91,11 +91,11 @@ void actualizarDisparos() {
 
     for (int i = 0; i < shots.size(); i++) {
         if (!shots[i].active) continue;
-        for (int j = 0; j < ciempiesX.size(); j++) {
-            if (ciempiesY == shots[i].y && ciempiesX[j] == shots[i].x) {
-                ciempiesX.erase(ciempiesX.begin() + j);
+        for (int j = 0; j < centipedeX.size(); j++) {
+            if (centipedeY == shots[i].y && centipedeX[j] == shots[i].x) {
+                centipedeX.erase(centipedeX.begin() + j);
                 shots[i].active = false;
-                puntuacion += 10;
+                score += 10;
                 break;
             }
         }
@@ -111,8 +111,8 @@ void actualizarDisparos() {
 
 void actualizarCiempies() {
     bool chocoBorde = false;
-    for (int cx : ciempiesX) {
-        int nuevoX = cx + direccion;
+    for (int cx : centipedeX) {
+        int nuevoX = cx + direction;
         if (nuevoX < 0 || nuevoX >= WIDTH) {
             chocoBorde = true;
             break;
@@ -120,27 +120,27 @@ void actualizarCiempies() {
     }
 
     if (chocoBorde) {
-        direccion = -direccion;
-        ciempiesY++;
+        direction = -direction;
+        centipedeY++;
     } else {
-        for (int& cx : ciempiesX) {
-            cx += direccion;
+        for (int& cx : centipedeX) {
+            cx += direction;
         }
     }
 
-    if (ciempiesY >= HEIGHT - 1) {
-        vidas--;
-        iniciarCiempies();
+    if (centipedeY >= HEIGHT - 1) {
+        lives--;
+        startCentipede();
     }
 
-    if (ciempiesX.empty()) {
-        cuentaInicial += 2;
-        if (cuentaInicial > WIDTH / 2) cuentaInicial = WIDTH / 2;
+    if (centipedeX.empty()) {
+        initialCount += 2;
+        if (initialCount > WIDTH / 2) initialCount = WIDTH / 2;
 
-        velocidadCiempies -= 5;
-        if (velocidadCiempies < 20) velocidadCiempies = 20;
+        centipedeSpeed -= 5;
+        if (centipedeSpeed < 20) centipedeSpeed = 20;
 
-        iniciarCiempies();
+        startCentipede();
     }
 }
 
@@ -149,12 +149,12 @@ void actualizarJuego() {
         int tecla = _getch();
         if (tecla == 224) {
             int flecha = _getch();
-            if (flecha == 75 && jugadorX > 0) jugadorX--;
-            if (flecha == 77 && jugadorX < WIDTH - 1) jugadorX++;
+            if (flecha == 75 && playerX > 0) playerX--;
+            if (flecha == 77 && playerX < WIDTH - 1) playerX++;
         } else if (tecla == ' ') {
             if (shots.size() < 3) {
                 Shot nuevoDisparo;
-                nuevoDisparo.x = jugadorX;
+                nuevoDisparo.x = playerX;
                 nuevoDisparo.y = HEIGHT - 2;
                 nuevoDisparo.active = true;
                 shots.push_back(nuevoDisparo);
@@ -164,14 +164,14 @@ void actualizarJuego() {
 
     actualizarDisparos();
 
-    if (clock() - ultimaMovidaCiempies > velocidadCiempies * CLOCKS_PER_SEC / 1000) {
+    if (clock() - lastmoveCentipede > centipedeSpeed * CLOCKS_PER_SEC / 1000) {
         actualizarCiempies();
-        ultimaMovidaCiempies = clock();
+        lastmoveCentipede = clock();
     }
 }
 
 bool juegoTerminado() {
-    return vidas <= 0;
+    return lives <= 0;
 }
 
 void iniciarJuego() {
@@ -179,19 +179,19 @@ void iniciarJuego() {
     cursorInfo.bVisible = false;
     SetConsoleCursorInfo(hConsole, &cursorInfo);
 
-    tiempoInicio = clock();
-    jugadorX = WIDTH / 2;
-    puntuacion = 0;
-    vidas = 3;
+    startTime = clock();
+    playerX = WIDTH / 2;
+    score = 0;
+    lives = 3;
     shots.clear();
-    iniciarCiempies();
+    startCentipede();
 
     system("cls");
 
     while (!juegoTerminado()) {
-        limpiarPantallaJuego();
-        dibujarPantallaJuego();
-        mostrarJuego();
+        clearScreenGame();
+        drawScreenGame();
+        showGame();
         actualizarJuego();
         Sleep(10);
     }
@@ -201,6 +201,6 @@ void iniciarJuego() {
 
     system("cls");
     cout << "\n=== JUEGO TERMINADO ===\n";
-    cout << "Puntaje final: " << puntuacion << endl;
+    cout << "Puntaje final: " << score << endl;
     system("pause");
 }
