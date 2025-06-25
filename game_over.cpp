@@ -29,3 +29,16 @@ int pantalla_completa_gameover()
         "SALIR"
     };
 }
+
+int seleccionado = 0;
+char tecla;
+
+while (true)
+{
+    limpiar_pantalla();
+    mostrar_pantalla_gameover();
+    cout <<"\n ¡HAS PERDIDO LA PARTIDA! \n";
+    cout <<"\n Usa las flechas (arriba/abajo) y ENTER para seleccionar:\n\n";
+
+
+}
