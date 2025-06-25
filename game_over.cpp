@@ -40,5 +40,15 @@ while (true)
     cout <<"\n ¡HAS PERDIDO LA PARTIDA! \n";
     cout <<"\n Usa las flechas (arriba/abajo) y ENTER para seleccionar:\n\n";
 
+    for (int i = 0; i < opciones.size(); i++)
+    {
+        if (i == seleccionado)
+        {
+                cout << "\t  > " << opciones[i] << " <" << "\n";
+            else
+                cout << "\t    " << opciones[i] << "\n";
+        }
+    }
+    
 
 }
