@@ -8,7 +8,8 @@ void limpiar_pantalla()
     system("cls");
 }
 
-void pantalla_gameover(){
+void mostrar_pantalla_gameover()
+{
     cout << R"(
  ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
 ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
@@ -18,4 +19,13 @@ void pantalla_gameover(){
  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚══▀▀═╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
                                                                         
     )" << "\n";
+}
+
+int pantalla_completa_gameover()
+{
+    vector<string> opciones =
+    {
+        "JUGAR DE NUEVO",
+        "SALIR"
+    };
 }
