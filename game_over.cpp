@@ -49,6 +49,17 @@ while (true)
                 cout << "\t    " << opciones[i] << "\n";
         }
     }
+    tecla = _getch();
+    if (tecla == -32 || tecla = 224)
+    {
+        tecla = _getch();
+        if (tecla == 72)
+        {
+            seleccionado = (seleccionado - 1 + opciones.size()) % opciones.size();
+        }
+        
+    }
+    
     
 
 }
