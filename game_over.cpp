@@ -2,6 +2,21 @@
 #include <conio.h>
 #include <windows.h>
 #include <vector>
+#ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
+#define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
+#endif
+
+HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+
+void habilitarANSI() {
+    DWORD mode = 0;
+    GetConsoleMode(hStdout, &mode);
+    SetConsoleMode(hStdout, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+}
+
+void limpiarPantalla() {
+    cout << "\x1B[2J\x1B[H";  // o system("cls");
+}
 using namespace std;
 void limpiar_pantalla()
 {
