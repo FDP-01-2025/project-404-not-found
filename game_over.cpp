@@ -76,7 +76,10 @@ int main ()
 
     while (seguir_jugando)
     {
-        /* code */
+        limpiar_pantalla();
+        cout <<"SIMULANDO PARTIDA ....\n";
+        Sleep(2000); 
+
     }
     
 }
