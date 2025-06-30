@@ -44,9 +44,11 @@ while (true)
     {
         if (i == seleccionado)
         {
-                cout << "\t  > " << opciones[i] << " <" << "\n";
-            else
-                cout << "\t    " << opciones[i] << "\n";
+            cout << "\t  > " << opciones[i] << " <" << "\n";
+        }
+        else
+        {
+            cout << "\t    " << opciones[i] << "\n";
         }
     }
     tecla = _getch();
@@ -57,9 +59,14 @@ while (true)
         {
             seleccionado = (seleccionado - 1 + opciones.size()) % opciones.size();
         }
+        else if(tecla == 80)
+        {
+            seleccionado = (seleccionado + 1) % opciones.size();
+        }
         
     }
-    
-    
-
+    else if(tecla == 13)
+    {
+        return seleccionado +1;
+    }
 }
