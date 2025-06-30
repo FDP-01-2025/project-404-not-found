@@ -67,7 +67,7 @@ int pantalla_completa_gameover()
             }
         }
         tecla = _getch();
-        if (tecla == -32 || tecla = 224)
+        if (tecla == -32 || tecla == 224)
         {
             tecla = _getch();
             if (tecla == 72)
@@ -95,7 +95,7 @@ int main ()
         cout <<"SIMULANDO PARTIDA ....\n";
         Sleep(2000); 
 
-        int opcion = mostrar_pantalla_gameover();
+        int opcion = pantalla_completa_gameover();
 
         if (opcion == 1)
         {
@@ -104,7 +104,7 @@ int main ()
         }
         else
         {
-            cout <<"\n Gracias por jugar. Hasta luego gamer :) !\n"
+            cout <<"\n Gracias por jugar. Hasta luego gamer :) !\n";
             seguir_jugando = false;
         }
     }
