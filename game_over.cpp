@@ -70,3 +70,13 @@ while (true)
         return seleccionado +1;
     }
 }
+int main ()
+{
+    bool seguir_jugando = true;
+
+    while (seguir_jugando)
+    {
+        /* code */
+    }
+    
+}
