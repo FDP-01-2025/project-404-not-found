@@ -82,8 +82,12 @@ int main ()
 
         int opcion = mostrar_pantalla_gameover();
 
-        
-
+        if (opcion == 1)
+        {
+            cout << "\nReiniciando partida...\n";
+            Sleep(1000);
+        }
+        else
     }
     
 }
