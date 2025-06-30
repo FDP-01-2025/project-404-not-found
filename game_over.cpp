@@ -90,7 +90,8 @@ int main ()
         else
         {
             cout <<"\n Gracias por jugar. Hasta luego gamer :) !\n"
+            seguir_jugando = false;
         }
     }
-    
+    return 0;
 }
