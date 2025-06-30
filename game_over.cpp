@@ -88,6 +88,9 @@ int main ()
             Sleep(1000);
         }
         else
+        {
+            cout <<"\n Gracias por jugar. Hasta luego gamer :) !\n"
+        }
     }
     
 }
