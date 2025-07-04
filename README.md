@@ -1,9 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/mi1WNrHU)
-# Proyecto de C++ - Centipede
+# 👾 Proyecto de C++ - Centipede
 
 ![Centipede](resources/centipede.jpg)
 
-## Descripción del Proyecto
+## 📑 Descripción del Proyecto
 
 **Temática y ambientación:**
 El entorno podría decirse que representa un jardín en el que emerge un centipede de la parte superior y baja hacia el jugador.
@@ -20,7 +20,7 @@ Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dif
 
 Tienes 3 vidas, el centipede se mueve hacia abajo hasta llegar al shooter del jugador, para vencerlo tienes que disparale en la cabeza, de lo contario, perderás.
 
-## Aplicación de los temas vistos
+## ⚙ Aplicación de los temas vistos
 
 **Variables y tipos de datos**: 
 
@@ -123,11 +123,11 @@ Ejemplo: Se usó una función tipo void para imprimir la pantalla del juego en l
 ![Pantalla de partida](resources/mockup_partida.png)
 
 
-## Equipo
+## 🕹 Equipo
 
 - **Nombre del equipo:** Code_Warriors.cpp
 
-### Integrantes del equipo
+### 👥Integrantes del equipo
 
 1. **Nombre completo:** Milton Guillermo Rivas Palacios  
    **Carnet:** 00019725
