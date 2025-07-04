@@ -8,22 +8,22 @@
 
 HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
-void habilitarANSI() {
+void enableANSI() {
     DWORD mode = 0;
     GetConsoleMode(hStdout, &mode);
     SetConsoleMode(hStdout, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
 }
 
-void limpiarPantalla() {
+void clearScreen() {
     cout << "\x1B[2J\x1B[H";  // o system("cls");
 }
 using namespace std;
-void limpiar_pantalla()
+void clear_screen()
 {
     system("cls");
 }
 
-void mostrar_pantalla_gameover()
+void show_game_over_screen()
 {
     cout << R"(
  ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
@@ -36,7 +36,7 @@ void mostrar_pantalla_gameover()
     )" << "\n";
 }
 
-int pantalla_completa_gameover()
+int complete_screen_gameover()
 {
     vector<string> opciones =
     {
@@ -50,8 +50,8 @@ int pantalla_completa_gameover()
 
     while (true)
     {
-        limpiar_pantalla();
-        mostrar_pantalla_gameover();
+        clear_screen();
+        show_game_over_screen();
         cout <<"\n ¡HAS PERDIDO LA PARTIDA! \n";
         cout <<"\n Usa las flechas (arriba/abajo) y ENTER para seleccionar:\n\n";
 
@@ -87,15 +87,15 @@ int pantalla_completa_gameover()
 } 
 int main ()
 {
-    bool seguir_jugando = true;
+    bool keep_playing = true;
 
-    while (seguir_jugando)
+    while (keep_playing)
     {
-        limpiar_pantalla();
+        clear_screen();
         cout <<"SIMULANDO PARTIDA ....\n";
         Sleep(2000); 
 
-        int opcion = pantalla_completa_gameover();
+        int opcion = complete_screen_gameover();
 
         if (opcion == 1)
         {
@@ -105,7 +105,7 @@ int main ()
         else
         {
             cout <<"\n Gracias por jugar. Hasta luego gamer :) !\n";
-            seguir_jugando = false;
+            keep_playing = false;
         }
     }
     return 0;

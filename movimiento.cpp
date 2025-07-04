@@ -8,11 +8,11 @@ int main (void){
 
     do
     {
-        for (int i = 0; i < y; i++) //Se coloca para representar el movimeinto vertical de la nave//
+        for (int i = 0; i < y; i++) //Se coloca para representar el movimiento vertical de la nave//
         {
             cout <<"\n"; 
         }
-        for (int i = 0; i < x; i++) //Se coloca para realizar el movimeinto horizontal de la nave//
+        for (int i = 0; i < x; i++) //Se coloca para realizar el movimiento horizontal de la nave//
         {
             cout <<" ";
         } 

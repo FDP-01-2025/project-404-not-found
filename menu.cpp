@@ -13,13 +13,13 @@ using namespace std;
 
 HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
-void habilitarANSI() {
+void enableANSI() {
     DWORD mode = 0;
     GetConsoleMode(hStdout, &mode);
     SetConsoleMode(hStdout, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
 }
 
-void limpiarPantalla() {
+void clearScreen() {
     cout << "\x1B[2J\x1B[H";
 }
 
@@ -45,7 +45,7 @@ int menuInteractivo() {
     char tecla = 0;
 
     while (true) {
-        limpiarPantalla();
+        clearScreen();
         mostrarEncabezado();
         cout << "Usa las flechas (arriba/abajo) y ENTER para seleccionar:\n\n";
         for (int i = 0; i < opciones.size(); ++i) {
@@ -68,11 +68,11 @@ int menuInteractivo() {
 }
 
 int main() {
-    habilitarANSI();
+    enableANSI();
     while (true) {
         int opcion = menuInteractivo();
 
-        limpiarPantalla();
+        clearScreen();
         mostrarEncabezado();
         if (opcion == 1) {
             cout << "\nCARGANDO PARTIDA...\n";
