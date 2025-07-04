@@ -16,7 +16,7 @@ En arcade se usa trackball, lo que permite un movimiento suave y preciso, en cam
 
 Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dificulta.
 
-El centipede se mueve hacia abajo hasta llegar al shooter del jugador, para vencerlo tienes que disparale en la cabeza, de lo contario, perderás.
+Tienes 3 vidas, el centipede se mueve hacia abajo hasta llegar al shooter del jugador, para vencerlo tienes que disparale en la cabeza, de lo contario, perderás.
 
 ## Aplicación de los temas vistos
 
@@ -108,9 +108,17 @@ Ejemplo: Se usó una función tipo void para imprimir la pantalla del juego en l
     }
 }`
 
+## Ejecución
+
+## Consideraciones técnicas
+
+
+
 ## Mockups
 
+![Pantalla de inicio](resources/mockup_pantalla_de_inicio.png)
 
+![Pantalla de partida](resources/mockup_partida.png)
 
 
 ## Equipo
