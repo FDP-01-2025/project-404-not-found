@@ -1,6 +1,8 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/mi1WNrHU)
 # Proyecto de C++ - Centipede
 
+![Centipede](resources/centipede.jpg)
+
 ## Descripción del Proyecto
 
 **Temática y ambientación:**
@@ -14,7 +16,7 @@ El juego consiste en disparar a la cabeza del centipede para ganar, moviendote u
 
 En arcade se usa trackball, lo que permite un movimiento suave y preciso, en cambio en el ordenador ocupas las flechas direccionales. 
 
-Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dificulta.
+Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dificultad.
 
 Tienes 3 vidas, el centipede se mueve hacia abajo hasta llegar al shooter del jugador, para vencerlo tienes que disparale en la cabeza, de lo contario, perderás.
 
