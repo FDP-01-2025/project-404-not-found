@@ -42,5 +42,9 @@ void updateCentipede();
 void updateGame();
 bool endGame();
 void startGame();
-
+void enableANSI();
+void clearScreenANSI();
+void clearScreenGameover();
+void showGameOver();
+int complete_screen_gameover();
 #endif
