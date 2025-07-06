@@ -53,7 +53,7 @@ Ejemplo:
 
 Se aplicó este tipo de bucle para mover al centipede cuando choca con el borde. A continuación se muestra un fragmento del código que cumple la función.
 
-![Ejemplo de for](resources/Example_images/for_loop.png)
+![Ejemplo de for](resources/example_images/for_loop.png)
 
 **Uso del bucle while**:
 
@@ -61,13 +61,13 @@ Ejemplo:
 
 Se utliza en main para controlar el juego.
 
-![Ejemplo de while](resources/Example_images/while_loop.png)
+![Ejemplo de while](resources/example_images/while_loop.png)
 
 **Uso de Funciones**:
 
 Ejemplo: Se usó una función tipo void para comenzar el juego.
 
-![Ejemplo de funcion](resources/Example_images/function.png)
+![Ejemplo de funcion](resources/example_images/function.png)
 
 ## Ejecución
 
@@ -77,9 +77,9 @@ Ejemplo: Se usó una función tipo void para comenzar el juego.
 
 ## Mockups
 
-![Pantalla de inicio](resources/mockup_pantalla_de_inicio.png)
+![Pantalla de inicio](resources/mockups/mockup_pantalla_de_inicio.png)
 
-![Pantalla de partida](resources/mockup_partida.png)
+![Pantalla de partida](resources/mockups/mockup_partida.png)
 
 
 ## 🕹 Equipo
