@@ -76,9 +76,10 @@ Se aplicó este tipo de bucle para mover al centipede cuando choca con el borde.
 
 **Uso del bucle while**:
 
-Ejemplo: 
+Ejemplo:
 
 Se utliza en main para controlar el juego.
+
 ![Ejemplo de funcion](resources/Example_images/function.png)
 
 **Uso de Funciones**:
