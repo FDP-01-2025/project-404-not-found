@@ -45,7 +45,7 @@ Ejemplo:
 
 Un ejemplo de la aplicación del if, else es en el menú del juego, en el que se le pregunta al usuario si quiere jugar o salir del juego.
 
-![Ejemplo de if_else](resources/Example_images/if_else.png)
+![Ejemplo de if_else](resources/example_images/if_else.png)
 
 **Uso del bucle for**:
 
