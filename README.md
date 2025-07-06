@@ -45,16 +45,7 @@ Ejemplo:
 
 Un ejemplo de la aplicación del if, else es en el menú del juego, en el que se le pregunta al usuario si quiere jugar o salir del juego.
 
-`if (opcion == 1) {
-            cout << "\nCARGANDO PARTIDA...\n";
-            Sleep(1000);
-            startGame();
-}`
-
-`else {
-            cout << "\nGRACIAS POR JUGAR\n";
-            break;
-        }`
+![Ejemplo de if_else](resources/Example_images/if_else.png)
 
 **Uso del bucle for**:
 
@@ -62,17 +53,7 @@ Ejemplo:
 
 Se aplicó este tipo de bucle para mover al centipede cuando choca con el borde. A continuación se muestra un fragmento del código que cumple la función.
 
-`    for (int i = 0; i < shots.size(); i++) 
-{`
-
-    `if (shots[i].active) {
-            shots[i].y--;`
-
-            if (shots[i].y < 0) {
-                shots[i].active = false;
-            }
-        }
-    }`
+![Ejemplo de for](resources/Example_images/for_loop.png)
 
 **Uso del bucle while**:
 
@@ -80,7 +61,7 @@ Ejemplo:
 
 Se utliza en main para controlar el juego.
 
-![Ejemplo de funcion](resources/Example_images/function.png)
+![Ejemplo de while](resources/Example_images/while_loop.png)
 
 **Uso de Funciones**:
 
