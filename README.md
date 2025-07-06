@@ -60,7 +60,7 @@ Un ejemplo de la aplicación del if, else es en el menú del juego, en el que se
 
 Ejemplo: 
 
-Se aplicó este tipo de bucle para actualizar los disparos. A continuación se muestra un fragmento del código que cumple la función.
+Se aplicó este tipo de bucle para mover al centipede cuando choca con el borde. A continuación se muestra un fragmento del código que cumple la función.
 
 `    for (int i = 0; i < shots.size(); i++) 
 {`
@@ -78,37 +78,14 @@ Se aplicó este tipo de bucle para actualizar los disparos. A continuación se m
 
 Ejemplo: 
 
-Se utliza para controlar las funciones del juego cuando se está jugando.
-
-`    while (!endGame()) {`
-
-        clearScreenGame();
-        drawScreenGame();
-        showGame();
-        updateGame();
-        Sleep(10);
-    }`
+Se utliza en main para controlar el juego.
+![Ejemplo de funcion](resources/Example_images/function.png)
 
 **Uso de Funciones**:
 
-Ejemplo: Se usó una función tipo void para imprimir la pantalla del juego en la consola.
+Ejemplo: Se usó una función tipo void para comenzar el juego.
 
-`void drawScreenGame() {`
-
-    pantalla[HEIGHT - 1][playerX] = '^';
-
-    for (auto& shot : shots) {
-        if (shot.active && shot.y >= 0 && shot.y < HEIGHT) {
-            pantalla[shot.y][shot.x] = '|';
-        }
-    }
-
-    for (int cx : centipedeX) {
-        if (centipedeY < HEIGHT) {
-            pantalla[centipedeY][cx] = 'O';
-        }
-    }
-}`
+![Ejemplo de funcion](resources/Example_images/function.png)
 
 ## Ejecución
 
