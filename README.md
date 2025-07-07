@@ -7,7 +7,7 @@
 
 **Temática y ambientación:**
 
-El entorno podría decirse que representa un jardín en el que emerge un centipede de la parte superior y baja hacia el jugador.
+El entorno podría decirse que representa un jardín en el que emerge un centipede de la parte superior y baja hacia el jugador con  una forma amenzante, generando de esta forma una presión constante, creando en el usuario la sensacion que debe de actuar rápidamente, sino el ciempiés llegará a el y perderá una vida. 
 
 **Mecánica principal:**
 
