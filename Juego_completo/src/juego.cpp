@@ -185,14 +185,12 @@ void clearScreenGameover() {
 }
 
 void showGameOver() {
-    std::cout << R"(
- ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
-██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
-██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
-██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║██║   ██║██╔══╝  ██╔══██╗
-╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝╚██████╔╝███████╗██║  ██║
- ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚══▀▀═╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
-    )" << "\n";
+    std::cout << R"(  ________                                                  
+ /  _____/_____    _____   ____     _______  __ ___________ 
+/   \  ___\__  \  /     \_/ __ \   /  _ \  \/ // __ \_  __ \
+\    \_\  \/ __ \|  Y Y  \  ___/  (  <_> )   /\  ___/|  | \/
+ \______  (____  /__|_|  /\___  >  \____/ \_/  \___  >__|   
+        \/     \/      \/     \/                   \/       )" << "\n";
 }
 
 int complete_screen_gameover() {
@@ -203,8 +201,8 @@ int complete_screen_gameover() {
     while (true) {
         clearScreenGameover();
         showGameOver();
-        std::cout << "\n YOU LOST THE GAME! \n";
-        std::cout << "\n Use the arrow keys (up/down) and ENTER to select:\n\n";
+        std::cout << "\n ¡Perdiste! \n";
+        std::cout << "\n Utiliza las teclas de flecha (arriba/abajo) y ENTER para seleccionar:\n\n";
 
         for (size_t i = 0; i < options.size(); ++i) {
             std::cout << (i == selected ? "\t  > " : "\t    ") << options[i] << (i == selected ? " <" : "") << "\n";
@@ -255,4 +253,4 @@ void startGame() {
             break; // salir al menú principal
         }
     }
-}
+} 
