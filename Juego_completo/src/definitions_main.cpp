@@ -4,12 +4,12 @@
 #include <vector>
 #include <string>
 #include "menu.h"
+
+using namespace std;
+
 #ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
 #define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
 #endif
-
-
-using namespace std;
 
 HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -39,6 +39,7 @@ void mostrarEncabezado() {
 int menuInteractivo() {
     vector<string> opciones = {
         "INICIAR NUEVA PARTIDA",
+        "VER ESTADISTICAS DEL JUEGO",
         "SALIR DEL JUEGO"
     };
     int seleccionado = 0;

@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <windows.h>
 #include "./src/menu.h"
+
 using namespace std;
 
 int main() {
@@ -15,11 +16,16 @@ int main() {
             cout << "\nCARGANDO PARTIDA...\n";
             Sleep(1000);
             startGame(); 
+        } else if (opcion == 2) {
+            clearScreen();
+            mostrarEncabezado();
+            mostrarEstadisticas(); 
         } else {
             cout << "\nGRACIAS POR JUGAR\n";
             break;
         }
-        cout << "\nPresiona cualquier tecla para volver al menu principal del juego...\n";
+
+        cout << "\nPresiona cualquier tecla para volver al menú principal...\n";
         _getch();
     }
     return 0;

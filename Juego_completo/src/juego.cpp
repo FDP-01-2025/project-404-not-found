@@ -4,15 +4,18 @@
 #include <vector>
 #include <ctime>
 #include <windows.h>
+#include <fstream>
 
 using namespace std;
 
+// ==========================
 // Constantes del juego
+// ==========================
 const int WIDTH = 30;
 const int HEIGHT = 20;
 const int MAX_SHOTS = 3;
 
-// Estructura para los disparos
+// Estructuras
 struct Shot {
     int x, y;
     bool active;
@@ -36,7 +39,9 @@ clock_t startTime;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 CONSOLE_CURSOR_INFO cursorInfo;
 
+// ==========================
 // Prototipos
+// ==========================
 void startCentipede();
 void clearScreenGame();
 void drawScreenGame();
@@ -48,8 +53,65 @@ bool endGame();
 void clearScreenGameover();
 void showGameOver();
 int complete_screen_gameover();
-void startGame();
+void guardarEstadisticas(int nuevoPuntaje);
+void mostrarEstadisticas();
 
+// ==========================
+// Guardar estadísticas
+// ==========================
+void guardarEstadisticas(int nuevoPuntaje) {
+    int intentos = 0;
+    int mejorPuntaje = 0;
+
+    ifstream in("puntaje.record");
+    if (in.is_open()) {
+        string tmp;
+        in >> tmp >> intentos;
+        in >> tmp >> mejorPuntaje;
+        in.close();
+    }
+
+    intentos++;
+    if (nuevoPuntaje > mejorPuntaje) {
+        mejorPuntaje = nuevoPuntaje;
+    }
+
+    ofstream out("puntaje.record");
+    out << "Intentos: " << intentos << endl;
+    out << "MejorPuntaje: " << mejorPuntaje << endl;
+    out.close();
+}
+
+// ==========================
+// Mostrar estadísticas
+// ==========================
+void mostrarEstadisticas() {
+    ifstream in("puntaje.record");
+    if (in.is_open()) {
+        string label1, label2;
+        int intentos = 0, mejorPuntaje = 0;
+
+        in >> label1 >> intentos;
+        in >> label2 >> mejorPuntaje;
+
+        cout << "\n====== ESTADÍSTICAS DEL JUEGO ======\n";
+        cout << "Intentos: " << intentos << endl;
+        cout << "Mejor puntaje: " << mejorPuntaje << endl;
+        cout << "====================================\n";
+
+        in.close();
+    } else {
+        cout << "\nAún no hay estadísticas guardadas.\n";
+    }
+
+    cout << "\nPresiona cualquier tecla para continuar...\n";
+    _getch();
+}
+
+
+// ==========================
+// Juego
+// ==========================
 void startCentipede() {
     centipedeY = 0;
     centipedeX.clear();
@@ -188,8 +250,8 @@ void showGameOver() {
     std::cout << R"(  ________                                                  
  /  _____/_____    _____   ____     _______  __ ___________ 
 /   \  ___\__  \  /     \_/ __ \   /  _ \  \/ // __ \_  __ \
-\    \_\  \/ __ \|  Y Y  \  ___/  (  <_> )   /\  ___/|  | \/
- \______  (____  /__|_|  /\___  >  \____/ \_/  \___  >__|   
+\    \_\  \/ __ \|  Y Y  \  ___/  (  <_> )   /\  ___/|  | \/ 
+ \______  (____  /__|_|  /\___  >  \____/ \_/  \___  >__|    
         \/     \/      \/     \/                   \/       )" << "\n";
 }
 
@@ -241,6 +303,8 @@ void startGame() {
         Sleep(10);
     }
 
+    guardarEstadisticas(score);
+
     cursorInfo.bVisible = true;
     SetConsoleCursorInfo(hConsole, &cursorInfo);
 
@@ -253,4 +317,4 @@ void startGame() {
             break; // salir al menú principal
         }
     }
-} 
+}

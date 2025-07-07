@@ -6,7 +6,8 @@ void clearScreen();
 void mostrarEncabezado();
 int menuInteractivo();
 
-// Declaración para enlazar con juego.cpp
+// Funciones del juego
 void startGame();
+void mostrarEstadisticas();
 
 #endif
