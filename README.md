@@ -16,7 +16,7 @@ El juego consiste en el jugador controla una pequeña nave con un cañon en la p
 
 **Idea general de la jugabilidad:**
 
-En arcade se usa trackball, lo que permite un movimiento suave y preciso, en cambio en el ordenador ocupas las flechas direccionales. 
+La jugabilidad se base en el clasico sistema de un arcade en donde se usa trackball, lo que permite un movimiento suave y preciso, en cambio en la adaptacion que se ha realizado para ordenador se ocupan las flechas direccionales. 
 
 Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dificultad.
 
