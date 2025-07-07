@@ -6,9 +6,11 @@
 ## 📑 Descripción del Proyecto
 
 **Temática y ambientación:**
+
 El entorno podría decirse que representa un jardín en el que emerge un centipede de la parte superior y baja hacia el jugador.
 
 **Mecánica principal:**
+
 El juego consiste en disparar a la cabeza del centipede para ganar, moviendote usando las flechas de dirección para calcular tus tiros.
 
 **Idea general de la jugabilidad:**
@@ -20,6 +22,7 @@ Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dif
 Tienes 3 vidas, el centipede se mueve hacia abajo hasta llegar al shooter del jugador, para vencerlo tienes que disparale en la cabeza, de lo contario, perderás.
 
 **Objetivo:**
+
 El objetivo principial de este, es destruir el ciempiés gigante que desciende por la pantalla y sobrevivir el mayor tiempo posible para acumular la puntuación más alta.
 ## ⚙ Aplicación de los temas vistos
 
