@@ -295,13 +295,15 @@ void startGame() {
     cursorInfo.bVisible = true;
     SetConsoleCursorInfo(hConsole, &cursorInfo);
 
-    while (true) {
+    do{
         int opt = complete_screen_gameover();
-        if (opt == 1) {
-            startGame();
-            break;
-        } else {
-            break; 
-        }
-    }
+        switch(opt){
+            case 1:
+                startGame();
+                break;
+            default:
+                break; 
+            }
+
+        }while (true);
 }
