@@ -11,7 +11,8 @@ El entorno podría decirse que representa un jardín en el que emerge un centipe
 
 **Mecánica principal:**
 
-El juego consiste en disparar a la cabeza del centipede para ganar, moviendote usando las flechas de dirección para calcular tus tiros.
+El juego consiste en el jugador controla una pequeña nave con un cañon en la parte inferior de la pantalla, este debe manipular esta, buscando disparar a la cabeza del centipede para ganar, moviendote usando las flechas de dirección para calcular tus tiros. Haciendo de esta forma que la clave del juego se convierta no solamente en disparar, sino calcular tus tiros para destruir al ciempiés lo antes posible. 
+
 
 **Idea general de la jugabilidad:**
 
@@ -24,6 +25,7 @@ Tienes 3 vidas, el centipede se mueve hacia abajo hasta llegar al shooter del ju
 **Objetivo:**
 
 El objetivo principial de este, es destruir el ciempiés gigante que desciende por la pantalla y sobrevivir el mayor tiempo posible para acumular la puntuación más alta.
+
 ## ⚙ Aplicación de los temas vistos
 
 **Variables y tipos de datos**: 
