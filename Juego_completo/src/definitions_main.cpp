@@ -39,7 +39,7 @@ void mostrarEncabezado() {
 int menuInteractivo() {
     vector<string> opciones = {
         "INICIAR NUEVA PARTIDA",
-        "VER ESTADISTICAS DEL JUEGO",
+        "ESTADISTICAS DEL JUEGO",
         "SALIR DEL JUEGO"
     };
     int seleccionado = 0;

@@ -5,23 +5,21 @@
 #include <ctime>
 #include <windows.h>
 #include <fstream>
+#include <direct.h> 
+#define DIR_NAME "informe"
+#define FILE_PATH "informe/puntaje.record"
 
 using namespace std;
 
-// ==========================
-// Constantes del juego
-// ==========================
 const int WIDTH = 30;
 const int HEIGHT = 20;
 const int MAX_SHOTS = 3;
 
-// Estructuras
 struct Shot {
     int x, y;
     bool active;
 };
 
-// Variables globales
 char pantalla[HEIGHT][WIDTH];
 int playerX = WIDTH / 2;
 vector<Shot> shots;
@@ -39,9 +37,6 @@ clock_t startTime;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 CONSOLE_CURSOR_INFO cursorInfo;
 
-// ==========================
-// Prototipos
-// ==========================
 void startCentipede();
 void clearScreenGame();
 void drawScreenGame();
@@ -56,14 +51,13 @@ int complete_screen_gameover();
 void guardarEstadisticas(int nuevoPuntaje);
 void mostrarEstadisticas();
 
-// ==========================
-// Guardar estadísticas
-// ==========================
 void guardarEstadisticas(int nuevoPuntaje) {
+    _mkdir(DIR_NAME); 
+
     int intentos = 0;
     int mejorPuntaje = 0;
 
-    ifstream in("puntaje.record");
+    ifstream in(FILE_PATH);
     if (in.is_open()) {
         string tmp;
         in >> tmp >> intentos;
@@ -76,17 +70,14 @@ void guardarEstadisticas(int nuevoPuntaje) {
         mejorPuntaje = nuevoPuntaje;
     }
 
-    ofstream out("puntaje.record");
+    ofstream out(FILE_PATH);
     out << "Intentos: " << intentos << endl;
     out << "MejorPuntaje: " << mejorPuntaje << endl;
     out.close();
 }
 
-// ==========================
-// Mostrar estadísticas
-// ==========================
 void mostrarEstadisticas() {
-    ifstream in("puntaje.record");
+    ifstream in(FILE_PATH);
     if (in.is_open()) {
         string label1, label2;
         int intentos = 0, mejorPuntaje = 0;
@@ -94,24 +85,20 @@ void mostrarEstadisticas() {
         in >> label1 >> intentos;
         in >> label2 >> mejorPuntaje;
 
-        cout << "\n====== ESTADÍSTICAS DEL JUEGO ======\n";
+        cout << "\n====== ESTADISTICAS DEL JUEGO ======\n";
         cout << "Intentos: " << intentos << endl;
         cout << "Mejor puntaje: " << mejorPuntaje << endl;
         cout << "====================================\n";
 
         in.close();
     } else {
-        cout << "\nAún no hay estadísticas guardadas.\n";
+        cout << "\nAun no hay estadisticas guardadas.\n";
     }
 
     cout << "\nPresiona cualquier tecla para continuar...\n";
     _getch();
 }
 
-
-// ==========================
-// Juego
-// ==========================
 void startCentipede() {
     centipedeY = 0;
     centipedeX.clear();
@@ -256,14 +243,14 @@ void showGameOver() {
 }
 
 int complete_screen_gameover() {
-    std::vector<std::string> options = { "PLAY AGAIN", "EXIT" };
+    std::vector<std::string> options = { "Jugar de nuevo", "Salir" };
     int selected = 0;
     char key;
 
     while (true) {
         clearScreenGameover();
         showGameOver();
-        std::cout << "\n ¡Perdiste! \n";
+        std::cout << "\n Perdiste! \n";
         std::cout << "\n Utiliza las teclas de flecha (arriba/abajo) y ENTER para seleccionar:\n\n";
 
         for (size_t i = 0; i < options.size(); ++i) {
@@ -311,10 +298,10 @@ void startGame() {
     while (true) {
         int opt = complete_screen_gameover();
         if (opt == 1) {
-            startGame(); // jugar de nuevo
+            startGame();
             break;
         } else {
-            break; // salir al menú principal
+            break; 
         }
     }
 }

@@ -25,7 +25,7 @@ int main() {
             break;
         }
 
-        cout << "\nPresiona cualquier tecla para volver al menú principal...\n";
+        cout << "\nPresiona cualquier tecla para volver al menu principal...\n";
         _getch();
     }
     return 0;
