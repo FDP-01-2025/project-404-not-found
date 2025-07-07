@@ -1,30 +1,24 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/mi1WNrHU)
 # 👾 Proyecto de C++ - Centipede
 
-![Centipede](resources/centipede1.png)
+![Centipede](resources/centipede.jpg)
 
 ## 📑 Descripción del Proyecto
 
 **Temática y ambientación:**
-
-El entorno podría decirse que representa un jardín en el que emerge un centipede de la parte superior y baja hacia el jugador con  una forma amenzante, generando de esta forma una presión constante, creando en el usuario la sensacion que debe de actuar rápidamente, sino el ciempiés llegará a el y perderá una vida. 
+El entorno podría decirse que representa un jardín en el que emerge un centipede de la parte superior y baja hacia el jugador.
 
 **Mecánica principal:**
-
-El juego consiste en el jugador controla una pequeña nave con un cañon en la parte inferior de la pantalla, este debe manipular esta, buscando disparar a la cabeza del centipede para ganar, moviendote usando las flechas de dirección para calcular tus tiros. Haciendo de esta forma que la clave del juego se convierta no solamente en disparar, sino calcular tus tiros para destruir al ciempiés lo antes posible. 
-
+El juego consiste en disparar a la cabeza del centipede para ganar, moviendote usando las flechas de dirección para calcular tus tiros.
 
 **Idea general de la jugabilidad:**
 
-La jugabilidad se base en el clasico sistema de un arcade en donde se usa trackball, lo que permite un movimiento suave y preciso, en cambio en la adaptacion que se ha realizado para ordenador se ocupan las flechas direccionales. 
+
+En arcade se usa trackball, lo que permite un movimiento suave y preciso, en cambio en el ordenador ocupas las flechas direccionales. 
 
 Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dificultad.
 
 Tienes 3 vidas, el centipede se mueve hacia abajo hasta llegar al shooter del jugador, para vencerlo tienes que disparale en la cabeza, de lo contario, perderás.
-
-**Objetivo:**
-
-El objetivo principial de este, es destruir el ciempiés gigante que desciende por la pantalla y sobrevivir el mayor tiempo posible para acumular la puntuación más alta.
 
 ## ⚙ Aplicación de los temas vistos
 
@@ -51,35 +45,70 @@ Ejemplo:
 
 Un ejemplo de la aplicación del if, else es en el menú del juego, en el que se le pregunta al usuario si quiere jugar o salir del juego.
 
-![Ejemplo de if_else](resources/Example_images/if_else.png)
+`if (opcion == 1) {
+            cout << "\nCARGANDO PARTIDA...\n";
+            Sleep(1000);
+            startGame();
+}`
 
-**Uso del bucle For**:
+`else {
+            cout << "\nGRACIAS POR JUGAR\n";
+            break;
+        }`
+
+**Uso del bucle for**:
 
 Ejemplo: 
 
-Se aplicó este tipo de bucle para mover al centipede cuando choca con el borde. A continuación se muestra un fragmento del código que cumple la función.
+Se aplicó este tipo de bucle para actualizar los disparos. A continuación se muestra un fragmento del código que cumple la función.
 
-![Ejemplo de for](resources/Example_images/for_loop.png)
+`    for (int i = 0; i < shots.size(); i++) 
+{`
 
-**Uso del bucle While**:
+    `if (shots[i].active) {
+            shots[i].y--;`
 
-Ejemplo:
+            if (shots[i].y < 0) {
+                shots[i].active = false;
+            }
+        }
+    }`
 
-Se utliza en main para controlar el juego.
+**Uso del bucle while**:
 
-![Ejemplo de while](resources/Example_images/while_loop.png)
+Ejemplo: 
+
+Se utliza para controlar las funciones del juego cuando se está jugando.
+
+`    while (!endGame()) {`
+
+        clearScreenGame();
+        drawScreenGame();
+        showGame();
+        updateGame();
+        Sleep(10);
+    }`
 
 **Uso de Funciones**:
 
-Ejemplo: Se usó una función tipo void para comenzar el juego.
+Ejemplo: Se usó una función tipo void para imprimir la pantalla del juego en la consola.
 
-![Ejemplo de funcion](resources/Example_images/function.png)
+`void drawScreenGame() {`
 
-**Uso de Arrays**:
+    pantalla[HEIGHT - 1][playerX] = '^';
 
-Ejemplo: Se usó un array bidimensional tipo char para definir el ancho y largo de la pantalla del juego.
+    for (auto& shot : shots) {
+        if (shot.active && shot.y >= 0 && shot.y < HEIGHT) {
+            pantalla[shot.y][shot.x] = '|';
+        }
+    }
 
-![Ejemplo de Array](resources/Example_images/array.png)
+    for (int cx : centipedeX) {
+        if (centipedeY < HEIGHT) {
+            pantalla[centipedeY][cx] = 'O';
+        }
+    }
+}`
 
 ## Ejecución
 
@@ -89,11 +118,10 @@ Ejemplo: Se usó un array bidimensional tipo char para definir el ancho y largo 
 
 ## Mockups
 
-![Pantalla de inicio](resources/mockups/mockup_pantalla_de_inicio.png)
+![Pantalla de inicio](resources/mockup_pantalla_de_inicio.png)
 
-![Pantalla de partida](resources/mockups/mockup_partida.png)
+![Pantalla de partida](resources/mockup_partida.png)
 
-![Pantalla de game over](resources/mockups/game_over_screen.png)
 
 ## 🕹 Equipo
 
