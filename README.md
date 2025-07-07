@@ -53,7 +53,7 @@ Un ejemplo de la aplicación del if, else es en el menú del juego, en el que se
 
 ![Ejemplo de if_else](resources/Example_images/if_else.png)
 
-**Uso del bucle for**:
+**Uso del bucle For**:
 
 Ejemplo: 
 
@@ -61,7 +61,7 @@ Se aplicó este tipo de bucle para mover al centipede cuando choca con el borde.
 
 ![Ejemplo de for](resources/Example_images/for_loop.png)
 
-**Uso del bucle while**:
+**Uso del bucle While**:
 
 Ejemplo:
 
@@ -74,6 +74,12 @@ Se utliza en main para controlar el juego.
 Ejemplo: Se usó una función tipo void para comenzar el juego.
 
 ![Ejemplo de funcion](resources/Example_images/function.png)
+
+**Uso de Arrays**:
+
+Ejemplo: Se usó un array bidimensional para definir el ancho y largo de la pantalla del juego.
+
+![Ejemplo de Array](resources\Example_images\array.png)
 
 ## Ejecución
 
