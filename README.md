@@ -79,7 +79,7 @@ Ejemplo: Se usó una función tipo void para comenzar el juego.
 
 Ejemplo: Se usó un array bidimensional para definir el ancho y largo de la pantalla del juego.
 
-![Ejemplo de Array](resources\Example_images\array.png)
+![Ejemplo de Array](resources/Example_images/array.png)
 
 ## Ejecución
 
