@@ -89,12 +89,6 @@ Ejemplo: Se usó para almacenar y mostrar las estadísticas del juego (# de inte
 
 ![Ejemplo de Archivos 2](resources/Example_images/archives_example2.png)
 
-## Ejecución
-
-## Consideraciones técnicas
-
-
-
 ## Mockups
 
 ![Pantalla de inicio](resources/mockups/mockup_pantalla_de_inicio.png)
@@ -102,6 +96,48 @@ Ejemplo: Se usó para almacenar y mostrar las estadísticas del juego (# de inte
 ![Pantalla de partida](resources/mockups/mockup_partida.png)
 
 ![Pantalla de game over](resources/mockups/game_over_screen.png)
+
+## Consideraciones técnicas
+
+**Para el desarrollo del juego se utilizaron las siguientes bibliotecas:**
+
+`#include <iostream>`
+
+`#include <conio.h>`
+
+`#include <algorithm>`
+
+`#include <vector>`
+
+`#include <ctime>`
+
+`#include <windows.h>`
+
+`#include <fstream>`
+
+`#include <direct.h>`
+
+**El IDE utilizado por todos los integrantes del equipo fue:**
+
+- Visual Studio Code
+
+**Tener en cuenta que hay que tener el compilador MinGW para poder compilar y ejecutar el programa.**
+
+Video que explica como hacerlo: https://www.youtube.com/watch?v=T5ZtxhSoOGg
+
+Requisitos minimos para ejecutar el programa:
+
+
+- Microsoft Windows 2000, XP
+- 2GB de RAM
+- Procesador compatible Intel a 400
+- 200 MB de espacio libre en el disco duro
+
+## Instrucciones de Ejecución
+
+1. Clona este repositorio en tu máquina local:
+   ```bash
+   git clone https://github.com/FDP-01-2025/project-404-not-found
 
 ## 🕹 Equipo
 
@@ -121,9 +157,4 @@ Ejemplo: Se usó para almacenar y mostrar las estadísticas del juego (# de inte
 4. **Nombre completo:** Josué Miguel Peña Torres  
    **Carnet:** 00014425
 
-## Instrucciones de Ejecución
-
-1. Clona este repositorio en tu máquina local:
-   ```bash
-   git clone https://github.com/FDP-01-2025/project-404-not-found
 
