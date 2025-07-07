@@ -77,7 +77,7 @@ Ejemplo: Se usó una función tipo void para comenzar el juego.
 
 **Uso de Arrays**:
 
-Ejemplo: Se usó un array bidimensional para definir el ancho y largo de la pantalla del juego.
+Ejemplo: Se usó un array bidimensional tipo char para definir el ancho y largo de la pantalla del juego.
 
 ![Ejemplo de Array](resources/Example_images/array.png)
 
@@ -93,6 +93,7 @@ Ejemplo: Se usó un array bidimensional para definir el ancho y largo de la pant
 
 ![Pantalla de partida](resources/mockups/mockup_partida.png)
 
+![Pantalla de game over](resources/mockups/game_over_screen.png)
 
 ## 🕹 Equipo
 
