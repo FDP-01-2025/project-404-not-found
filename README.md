@@ -13,13 +13,14 @@ El juego consiste en disparar a la cabeza del centipede para ganar, moviendote u
 
 **Idea general de la jugabilidad:**
 
-
 En arcade se usa trackball, lo que permite un movimiento suave y preciso, en cambio en el ordenador ocupas las flechas direccionales. 
 
 Solo puedes tener un solo disparo en pantalla a la vez, lo que añade cierta dificultad.
 
 Tienes 3 vidas, el centipede se mueve hacia abajo hasta llegar al shooter del jugador, para vencerlo tienes que disparale en la cabeza, de lo contario, perderás.
 
+**Objetivo:**
+El objetivo principial de este, es destruir el ciempiés gigante que desciende por la pantalla y sobrevivir el mayor tiempo posible para acumular la puntuación más alta.
 ## ⚙ Aplicación de los temas vistos
 
 **Variables y tipos de datos**: 
