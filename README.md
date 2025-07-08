@@ -128,10 +128,6 @@ Ejemplo: Se usó para obtener las teclas presionadas por el usuario para control
 
 - Visual Studio Code
 
-**Tener en cuenta que hay que tener el compilador MinGW para poder compilar y ejecutar el programa.**
-
-Video que explica como hacerlo: https://www.youtube.com/watch?v=T5ZtxhSoOGg
-
 Requisitos minimos para ejecutar el programa:
 
 - Microsoft Windows 2000, XP o Linux
