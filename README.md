@@ -89,16 +89,6 @@ Ejemplo: Se usó para almacenar y mostrar las estadísticas del juego (# de inte
 
 ![Ejemplo de Archivos 2](resources/Example_images/archives_example2.png)
 
-**Uso de do while**:
-
-Ejemplo: Se usó para la seleccion del usuario cuando pierde en conjunto con el `switch`.
-
-![Ejemplo de do while](resources/Example_images/do_while.png)
-
-**Uso de switch**:
-
-![Ejemplo de switch](resources/Example_images/switch.png)
-
 
 ## Mockups
 
