@@ -128,13 +128,15 @@ Video que explica como hacerlo: https://www.youtube.com/watch?v=T5ZtxhSoOGg
 
 Requisitos minimos para ejecutar el programa:
 
-
-- Microsoft Windows 2000, XP
+- Microsoft Windows 2000, XP o Linux
 - 2GB de RAM
 - Procesador compatible Intel a 400
 - 200 MB de espacio libre en el disco duro
+- Command Prompt o PowerShell en Windows
 
 ## ⚙Flujogramas
+
+**Recuerde acceder mediante correo uca**
 
 https://ucaedusv-my.sharepoint.com/:f:/g/personal/00128925_uca_edu_sv/EuYIEIiLsSVEhna4Sfb7KTUB8jVAjWzrGM0oBakQYAW1YQ?e=ZX5XBh
 
@@ -143,6 +145,21 @@ https://ucaedusv-my.sharepoint.com/:f:/g/personal/00128925_uca_edu_sv/EuYIEIiLsS
 1. Clona este repositorio en tu máquina local:
    ```bash
    git clone https://github.com/FDP-01-2025/project-404-not-found
+
+2. Ingresa al folder del proyecto:
+
+   ```bash
+   cd project-404-not-found
+
+3. Compila el programa:
+
+   ```bash
+   g++ -o main main.cpp
+
+4. Ejecuta el programa:
+
+   ```bash
+   ./main
 
 ## 🕹 Equipo
 
@@ -158,9 +175,3 @@ https://ucaedusv-my.sharepoint.com/:f:/g/personal/00128925_uca_edu_sv/EuYIEIiLsS
 
 3. **Nombre completo:** Diego Alejandro Tolentino  
    **Carnet:** 00128925
-
-### ⚙Flujograma
-
-**Recuerde acceder mediante correo uca**
-
-https://ucaedusv-my.sharepoint.com/:f:/g/personal/00128925_uca_edu_sv/EuYIEIiLsSVEhna4Sfb7KTUB8jVAjWzrGM0oBakQYAW1YQ?e=ZX5XBh
