@@ -4,19 +4,33 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <conio.h>
 #include <fstream>
+
+#ifdef _WIN32
+#include <conio.h>
 #include <direct.h>
+#else
+#include <unistd.h>
+#include <termios.h>
+#include <sys/stat.h>
+#include "utils.h" // Para _getch() y _kbhit() en Linux
+#endif
 
 using namespace std;
 
 #define DIR_NAME "informe"
 #define FILE_PATH "informe/puntaje.record"
 
+// Limpia la pantalla según el sistema operativo
 void clearScreen() {
+#ifdef _WIN32
+    system("cls");
+#else
     cout << "\x1B[2J\x1B[H";
+#endif
 }
 
+// Muestra el encabezado del menú principal
 void mostrarEncabezado() {
     cout << R"(
 =====================================================
@@ -25,11 +39,11 @@ void mostrarEncabezado() {
 | |   |  _| |  \| | | |  | || |_) |  _| | | | | |_   
 | |___| |___| |\  | | |  | ||  __/| |___| |_| | |___ 
  \____|_____|_| \_| |_| |___|_|   |_____|____/|_____|
-
 =====================================================
 )" << "\n";
 }
 
+// Menú interactivo principal, retorna la opción seleccionada
 int menuInteractivo() {
     vector<string> opciones = {
         "INICIAR NUEVA PARTIDA",
@@ -45,24 +59,26 @@ int menuInteractivo() {
         cout << "Usa las flechas (arriba/abajo) y ENTER para seleccionar:\n\n";
         for (int i = 0; i < (int)opciones.size(); ++i) {
             if (i == seleccionado)
-                cout << "  \x1B[7m> " << opciones[i] << " <\x1B[0m" << endl;
+                cout << "  \x1B[7m> " << opciones[i] << " <\x1B[0m" << endl; // Resalta opción seleccionada
             else
                 cout << "    " << opciones[i] << endl;
         }
 
-        tecla = _getch();
+        tecla = _getch(); // Lee tecla presionada
         if (tecla == -32 || tecla == 224) {
-            tecla = _getch();
-            if (tecla == 72)
-                seleccionado = (seleccionado - 1 + (int)opciones.size()) % (int)opciones.size();
-            else if (tecla == 80)
-                seleccionado = (seleccionado + 1) % (int)opciones.size();
-        } else if (tecla == 13) {
-            return seleccionado + 1;
+            tecla = _getch(); // Para compatibilidad con flechas en Windows
         }
+
+        if (tecla == 72)
+            seleccionado = (seleccionado - 1 + opciones.size()) % opciones.size(); // Flecha arriba
+        else if (tecla == 80)
+            seleccionado = (seleccionado + 1) % opciones.size(); // Flecha abajo
+        else if (tecla == 13)
+            return seleccionado + 1; // ENTER, retorna opción
     }
 }
 
+// Muestra las estadísticas guardadas del juego
 void mostrarEstadisticas() {
     ifstream in(FILE_PATH);
     if (in.is_open()) {
@@ -84,8 +100,9 @@ void mostrarEstadisticas() {
         cout << "\nAun no hay estadisticas guardadas.\n";
     }
 
-    cout << "\nPresiona cualquier tecla para continuar...\n";
-    _getch();
+    cout << "\nPresiona ENTER para continuar...\n";
+    cin.ignore();
+    cin.get();
 }
 
 #endif

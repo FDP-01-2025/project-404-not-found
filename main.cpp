@@ -1,33 +1,35 @@
 #include <iostream>
-#include <windows.h>
 #include "./src/menu.h"
 #include "./src/juego.h"
-#ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
-#define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
-#endif
-
 
 using namespace std;
 
 int main() {
-    enableANSI();
+    enableANSI(); // Activa colores y caracteres especiales en consola (solo en Windows)
 
     while (true) {
-        int opcion = menuInteractivo(); 
+        int opcion = menuInteractivo(); // Muestra el menú principal y devuelve la opción elegida
 
-        clearScreen();
-        mostrarEncabezado();
+        clearScreen(); 
+        mostrarEncabezado(); 
 
         if (opcion == 1) {
-            startGame(); 
+            startGame(); /*Inicia el juego/llama a la función que maneja el juego
+                         en juego.h*/
         } else if (opcion == 2) {
             mostrarEstadisticas(); 
         } else {
             break; 
         }
 
+        // Espera una tecla antes de volver al menú (compatible con Windows y Linux)
+#ifdef _WIN32
         _getch();
+#else
+        cin.ignore();
+        cin.get();
+#endif
     }
 
-    return 0;
+    return 0; 
 }

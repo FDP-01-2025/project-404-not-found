@@ -1,17 +1,22 @@
 #ifndef JUEGO_H
 #define JUEGO_H
-
+// Librerías para Windows/Linux
 #include <iostream>
-#include <conio.h>
-#include <windows.h>
 #include <vector>
 #include <ctime>
 #include <algorithm>
 #include <fstream>
+#include <string>
+// Librerías para manejo de consola y archivos por sistema operativo que se este usando
+#ifdef _WIN32
+#include <windows.h>
+#include <conio.h>
 #include <direct.h>
-
-#ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
-#define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
+#else
+#include <unistd.h>
+#include <termios.h>
+#include <sys/select.h>
+#include <sys/stat.h>
 #endif
 
 using namespace std;
@@ -19,18 +24,18 @@ using namespace std;
 #define DIR_NAME "informe"
 #define FILE_PATH "informe/puntaje.record"
 
+// Constantes del tamaño del juego y disparos
 const int WIDTH = 30;
 const int HEIGHT = 20;
 const int MAX_SHOTS = 3;
 
+// Estructura para los disparos
 struct Shot {
     int x, y;
     bool active;
 };
 
-HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-CONSOLE_CURSOR_INFO cursorInfo;
+// Variables globales del juego
 char pantalla[HEIGHT][WIDTH];
 int playerX = WIDTH / 2;
 vector<Shot> shots;
@@ -45,14 +50,91 @@ int centipedeSpeed = 80;
 clock_t lastmoveCentipede = 0;
 clock_t startTime;
 
+#ifdef _WIN32
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+CONSOLE_CURSOR_INFO cursorInfo;
+
+#ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
+#define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
+#endif
+
+// Habilita colores ANSI en Windows
 void enableANSI() {
     DWORD mode = 0;
-    GetConsoleMode(hStdout, &mode);
-    SetConsoleMode(hStdout, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+    GetConsoleMode(hConsole, &mode);
+    SetConsoleMode(hConsole, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
 }
 
+#else
+void enableANSI() {}
+#endif
+
+// Limpia la pantalla para el game over
+void clearScreenGameover() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+// Limpia la pantalla del juego
+void clearScreenGame() {
+    for (int y = 0; y < HEIGHT; y++)
+        for (int x = 0; x < WIDTH; x++)
+            pantalla[y][x] = ' ';
+}
+
+// Dibuja los elementos del juego en la matriz pantalla
+void drawScreenGame() {
+    pantalla[HEIGHT - 1][playerX] = '^'; // Jugador
+    for (const auto& shot : shots)
+        if (shot.active && shot.y >= 0 && shot.y < HEIGHT)
+            pantalla[shot.y][shot.x] = '|'; // Disparos
+
+    for (int cx : centipedeX)
+        if (centipedeY < HEIGHT)
+            pantalla[centipedeY][cx] = 'O'; // Ciempiés
+}
+
+// Muestra la pantalla del juego en consola
+void showGame() {
+#ifdef _WIN32
+    COORD pos = {0, 0};
+    SetConsoleCursorPosition(hConsole, pos);
+#else
+    cout << "\033[H"; 
+#endif
+
+    cout << "PUNTAJE: " << score << "   VIDAS: " << lives << endl;
+    cout << "+";
+    for (int i = 0; i < WIDTH; i++) cout << "-";
+    cout << "+" << endl;
+
+    for (int y = 0; y < HEIGHT; y++) {
+        cout << "|";
+        for (int x = 0; x < WIDTH; x++)
+            cout << pantalla[y][x];
+        cout << "|" << endl;
+    }
+
+    cout << "+";
+    for (int i = 0; i < WIDTH; i++) cout << "-";
+    cout << "+" << endl;
+
+    // Mostrar controles del juego debajo del tablero
+    cout << "\nControles: ";
+    cout << "[TECLAS IZQ/DER] Mover   ";
+    cout << "[\033[1mESPACIO\033[0m] Disparar" << endl;
+}
+
+// Guarda estadísticas del jugador en un archivo
 void guardarEstadisticas(int nuevoPuntaje) {
+#ifdef _WIN32
     _mkdir(DIR_NAME);
+#else
+    mkdir(DIR_NAME, 0777);
+#endif
 
     int intentos = 0;
     int mejorPuntaje = 0;
@@ -76,6 +158,7 @@ void guardarEstadisticas(int nuevoPuntaje) {
     out.close();
 }
 
+// Inicializa el ciempiés al inicio o cuando se reinicia
 void startCentipede() {
     centipedeY = 0;
     centipedeX.clear();
@@ -84,44 +167,7 @@ void startCentipede() {
     }
 }
 
-void clearScreenGame() {
-    for (int y = 0; y < HEIGHT; y++)
-        for (int x = 0; x < WIDTH; x++)
-            pantalla[y][x] = ' ';
-}
-
-void drawScreenGame() {
-    pantalla[HEIGHT - 1][playerX] = '^';
-    for (const auto& shot : shots)
-        if (shot.active && shot.y >= 0 && shot.y < HEIGHT)
-            pantalla[shot.y][shot.x] = '|';
-
-    for (int cx : centipedeX)
-        if (centipedeY < HEIGHT)
-            pantalla[centipedeY][cx] = 'O';
-}
-
-void showGame() {
-    COORD pos = {0, 0};
-    SetConsoleCursorPosition(hConsole, pos);
-
-    cout << "PUNTAJE: " << score << "   VIDAS: " << lives << endl;
-    cout << "+";
-    for (int i = 0; i < WIDTH; i++) cout << "-";
-    cout << "+" << endl;
-
-    for (int y = 0; y < HEIGHT; y++) {
-        cout << "|";
-        for (int x = 0; x < WIDTH; x++)
-            cout << pantalla[y][x];
-        cout << "|" << endl;
-    }
-
-    cout << "+";
-    for (int i = 0; i < WIDTH; i++) cout << "-";
-    cout << "+" << endl;
-}
-
+// Actualiza la posición de los disparos y verifica colisiones
 void updateShots() {
     for (auto& shot : shots) {
         if (shot.active) {
@@ -149,6 +195,7 @@ void updateShots() {
     );
 }
 
+// Mueve el ciempiés y verifica si toca los bordes o baja de nivel
 void updateCentipede() {
     bool hitBorder = false;
     for (int cx : centipedeX) {
@@ -167,11 +214,13 @@ void updateCentipede() {
             cx += direction;
     }
 
+    // Si el ciempiés llega abajo, pierdes una vida
     if (centipedeY >= HEIGHT - 1) {
         lives--;
         startCentipede();
     }
 
+    // Si matas todo el ciempiés, aumenta dificultad
     if (centipedeX.empty()) {
         initialCount = min(initialCount + 2, WIDTH / 2);
         centipedeSpeed = max(centipedeSpeed - 5, 20);
@@ -179,37 +228,42 @@ void updateCentipede() {
     }
 }
 
+#ifndef _WIN32
+#include <fcntl.h>
+#include <stdio.h>
+#include "utils.h"
+#endif
+
+// Controla el input del jugador y actualiza el juego
 void updateGame() {
     if (_kbhit()) {
         int key = _getch();
-        if (key == 224) {
+        if (key == 224 || key == 0 || key == -32) {
             int arrow = _getch();
-            if (arrow == 75 && playerX > 0) playerX--;
-            if (arrow == 77 && playerX < WIDTH - 1) playerX++;
+            if (arrow == 75 && playerX > 0) playerX--;         // Izquierda
+            if (arrow == 77 && playerX < WIDTH - 1) playerX++; // Derecha
         } else if (key == ' ') {
-            if (shots.size() < MAX_SHOTS) {
-                Shot newShot{playerX, HEIGHT - 2, true};
-                shots.push_back(newShot);
+            if ((int)shots.size() < MAX_SHOTS) {
+                shots.push_back(Shot{playerX, HEIGHT - 2, true});
             }
         }
     }
 
     updateShots();
 
+    // Mueve el ciempiés cada cierto tiempo
     if (clock() - lastmoveCentipede > centipedeSpeed * CLOCKS_PER_SEC / 1000) {
         updateCentipede();
         lastmoveCentipede = clock();
     }
 }
 
+// Retorna true si el juego terminó (sin vidas)
 bool endGame() {
     return lives <= 0;
 }
 
-void clearScreenGameover() {
-    system("cls");
-}
-
+// Dibuja la pantalla de Game Over
 void showGameOver() {
     cout << R"(  ________                                                  
  /  _____/_____    _____   ____     _______  __ ___________ 
@@ -219,6 +273,7 @@ void showGameOver() {
         \/     \/      \/     \/                   \/       )" << "\n";
 }
 
+// Menú de opciones al perder
 int complete_screen_gameover() {
     vector<string> options = { "Jugar de nuevo", "Salir" };
     int selected = 0;
@@ -228,27 +283,32 @@ int complete_screen_gameover() {
         clearScreenGameover();
         showGameOver();
         cout << "\n Perdiste! \n";
-        cout << "\n Utiliza las teclas de flecha (arriba/abajo) y ENTER para seleccionar:\n\n";
+        cout << "\n Usa flechas (arriba/abajo) y ENTER para seleccionar:\n\n";
 
         for (size_t i = 0; i < options.size(); ++i) {
             cout << (i == selected ? "\t  > " : "\t    ") << options[i] << (i == selected ? " <" : "") << "\n";
         }
 
         key = _getch();
-        if (key == -32 || key == 224) {
+        if (key == -32 || key == 224 || key == 0) {
             key = _getch();
-            if (key == 72) selected = (selected - 1 + options.size()) % options.size();
-            else if (key == 80) selected = (selected + 1) % options.size();
+            if (key == 72) selected = (selected - 1 + (int)options.size()) % (int)options.size();
+            else if (key == 80) selected = (selected + 1) % (int)options.size();
         } else if (key == 13) {
             return selected + 1;
         }
     }
 }
 
+// Función principal para iniciar el juego
 void startGame() {
+#ifdef _WIN32
     GetConsoleCursorInfo(hConsole, &cursorInfo);
     cursorInfo.bVisible = false;
     SetConsoleCursorInfo(hConsole, &cursorInfo);
+#else
+    cout << "\033[?25l"; 
+#endif
 
     startTime = clock();
     playerX = WIDTH / 2;
@@ -257,20 +317,29 @@ void startGame() {
     shots.clear();
     startCentipede();
 
-    system("cls");
+    clearScreenGameover();
 
     while (!endGame()) {
         clearScreenGame();
         drawScreenGame();
         showGame();
         updateGame();
+
+#ifdef _WIN32
         Sleep(10);
+#else
+        usleep(10000);
+#endif
     }
 
     guardarEstadisticas(score);
 
+#ifdef _WIN32
     cursorInfo.bVisible = true;
     SetConsoleCursorInfo(hConsole, &cursorInfo);
+#else
+    cout << "\033[?25h"; 
+#endif
 
     while (true) {
         int opt = complete_screen_gameover();
@@ -283,4 +352,4 @@ void startGame() {
     }
 }
 
-#endif 
+#endif
