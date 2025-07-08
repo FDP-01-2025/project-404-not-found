@@ -159,6 +159,8 @@ Requisitos minimos para ejecutar el programa:
    
 ### ⚙Flujograma
 
+**Recuerde acceder mediante correo uca**
+
 https://ucaedusv-my.sharepoint.com/:f:/g/personal/00128925_uca_edu_sv/EuYIEIiLsSVEhna4Sfb7KTUB8jVAjWzrGM0oBakQYAW1YQ?e=ZX5XBh
 
 
