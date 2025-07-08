@@ -1,15 +1,23 @@
+#ifndef JUEGO_H
+#define JUEGO_H
+
 #include <iostream>
 #include <conio.h>
-#include <algorithm>
+#include <windows.h>
 #include <vector>
 #include <ctime>
-#include <windows.h>
+#include <algorithm>
 #include <fstream>
-#include <direct.h> 
-#define DIR_NAME "informe"
-#define FILE_PATH "informe/puntaje.record"
+#include <direct.h>
+
+#ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
+#define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
+#endif
 
 using namespace std;
+
+#define DIR_NAME "informe"
+#define FILE_PATH "informe/puntaje.record"
 
 const int WIDTH = 30;
 const int HEIGHT = 20;
@@ -20,6 +28,9 @@ struct Shot {
     bool active;
 };
 
+HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+CONSOLE_CURSOR_INFO cursorInfo;
 char pantalla[HEIGHT][WIDTH];
 int playerX = WIDTH / 2;
 vector<Shot> shots;
@@ -34,25 +45,14 @@ int centipedeSpeed = 80;
 clock_t lastmoveCentipede = 0;
 clock_t startTime;
 
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-CONSOLE_CURSOR_INFO cursorInfo;
-
-void startCentipede();
-void clearScreenGame();
-void drawScreenGame();
-void showGame();
-void updateShots();
-void updateCentipede();
-void updateGame();
-bool endGame();
-void clearScreenGameover();
-void showGameOver();
-int complete_screen_gameover();
-void guardarEstadisticas(int nuevoPuntaje);
-void mostrarEstadisticas();
+void enableANSI() {
+    DWORD mode = 0;
+    GetConsoleMode(hStdout, &mode);
+    SetConsoleMode(hStdout, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+}
 
 void guardarEstadisticas(int nuevoPuntaje) {
-    _mkdir(DIR_NAME); 
+    _mkdir(DIR_NAME);
 
     int intentos = 0;
     int mejorPuntaje = 0;
@@ -74,29 +74,6 @@ void guardarEstadisticas(int nuevoPuntaje) {
     out << "Intentos: " << intentos << endl;
     out << "MejorPuntaje: " << mejorPuntaje << endl;
     out.close();
-}
-
-void mostrarEstadisticas() {
-    ifstream in(FILE_PATH);
-    if (in.is_open()) {
-        string label1, label2;
-        int intentos = 0, mejorPuntaje = 0;
-
-        in >> label1 >> intentos;
-        in >> label2 >> mejorPuntaje;
-
-        cout << "\n====== ESTADISTICAS DEL JUEGO ======\n";
-        cout << "Intentos: " << intentos << endl;
-        cout << "Mejor puntaje: " << mejorPuntaje << endl;
-        cout << "====================================\n";
-
-        in.close();
-    } else {
-        cout << "\nAun no hay estadisticas guardadas.\n";
-    }
-
-    cout << "\nPresiona cualquier tecla para continuar...\n";
-    _getch();
 }
 
 void startCentipede() {
@@ -234,7 +211,7 @@ void clearScreenGameover() {
 }
 
 void showGameOver() {
-    std::cout << R"(  ________                                                  
+    cout << R"(  ________                                                  
  /  _____/_____    _____   ____     _______  __ ___________ 
 /   \  ___\__  \  /     \_/ __ \   /  _ \  \/ // __ \_  __ \
 \    \_\  \/ __ \|  Y Y  \  ___/  (  <_> )   /\  ___/|  | \/ 
@@ -243,18 +220,18 @@ void showGameOver() {
 }
 
 int complete_screen_gameover() {
-    std::vector<std::string> options = { "Jugar de nuevo", "Salir" };
+    vector<string> options = { "Jugar de nuevo", "Salir" };
     int selected = 0;
     char key;
 
     while (true) {
         clearScreenGameover();
         showGameOver();
-        std::cout << "\n Perdiste! \n";
-        std::cout << "\n Utiliza las teclas de flecha (arriba/abajo) y ENTER para seleccionar:\n\n";
+        cout << "\n Perdiste! \n";
+        cout << "\n Utiliza las teclas de flecha (arriba/abajo) y ENTER para seleccionar:\n\n";
 
         for (size_t i = 0; i < options.size(); ++i) {
-            std::cout << (i == selected ? "\t  > " : "\t    ") << options[i] << (i == selected ? " <" : "") << "\n";
+            cout << (i == selected ? "\t  > " : "\t    ") << options[i] << (i == selected ? " <" : "") << "\n";
         }
 
         key = _getch();
@@ -295,15 +272,15 @@ void startGame() {
     cursorInfo.bVisible = true;
     SetConsoleCursorInfo(hConsole, &cursorInfo);
 
-    do{
+    while (true) {
         int opt = complete_screen_gameover();
-        switch(opt){
-            case 1:
-                startGame();
-                break;
-            default:
-                break; 
-            }
-
-        }while (true);
+        if (opt == 1) {
+            startGame();
+            break;
+        } else {
+            break;
+        }
+    }
 }
+
+#endif 

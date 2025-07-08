@@ -88,4 +88,4 @@ void mostrarEstadisticas() {
     _getch();
 }
 
-#endif // MENU_H
+#endif
