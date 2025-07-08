@@ -89,6 +89,12 @@ Ejemplo: Se usó para almacenar y mostrar las estadísticas del juego (# de inte
 
 ![Ejemplo de Archivos 2](resources/Example_images/archives_example2.png)
 
+**Uso de Switch**:
+
+Ejemplo: Se usó para obtener las teclas presionadas por el usuario para controlar al personaje.
+
+![Ejemplo de switch](resources/Example_images/switch.png)
+
 
 ## Mockups
 
